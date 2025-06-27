@@ -127,18 +127,6 @@ alias shutdown='sudo shutdown now'
 alias restart-dm='sudo systemctl restart display-manager'
 
 # ==========================================
-#           PACKAGE MANAGEMENT
-# ==========================================
-# Arch Linux package management shortcuts
-alias install='paru --noconfirm -S --needed'
-alias update='paru --noconfirm -Syu'
-alias remove='sudo pacman -Rns'
-alias remove-orphaned='sudo pacman -Rns $(pacman -Qtdq) && yay -Rns $(pacman-Qtdq) && paru -Rns $(pacman -Qtdq)'
-alias search='paru -Ss'
-alias aggressively-clear-cache='sudo pacman -Scc && yay -Scc && paru -Scc'
-alias clear-cache='sudo pacman -Sc && yay -Sc && paru -Sc'
-
-# ==========================================
 #           FILE OPERATIONS
 # ==========================================
 # Advanced file operations
