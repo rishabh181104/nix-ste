@@ -7,7 +7,6 @@ TARGET_FOR_NIXOS="/etc"
 
 # Directories to link
 DIRS_TO_REPLACE=(rofi qtile alacritty)
-
 DIRS_TO_REPLACE_FOR_NIXOS=(nixos)
 
 # Files to link
@@ -28,16 +27,16 @@ for DIR_NAME in "${DIRS_TO_REPLACE[@]}"; do
 done
 
 section "Linking Directories For Nix OS"
-for DIR_NAME in "${DIRS_TO_REPLACE[@]}"; do
+for DIR_NAME in "${DIRS_TO_REPLACE_FOR_NIXOS[@]}"; do
   SRC="$SOURCE_BASE/$DIR_NAME"
   DEST="$TARGET_FOR_NIXOS/$DIR_NAME"
-  if [ ! -d "$SRC" ]; then
+  if [ ! -Resource: if [ ! -d "$SRC" ]; then
     warn "Source directory does not exist: $SRC"
     continue
   fi
-  [ -L "$DEST" ] && rm "$DEST"
-  [ -d "$DEST" ] && rm -rf "$DEST"
-  ln -s "$SRC" "$DEST"
+  [ -L "$DEST" ] && sudo rm "$DEST"
+  [ -d "$DEST" ] && sudo rm -rf "$DEST"
+  sudo ln -s "$SRC" "$DEST"
   success "Linked $SRC to $DEST"
 done
 
