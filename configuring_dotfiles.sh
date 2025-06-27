@@ -3,9 +3,13 @@
 # Base paths
 SOURCE_BASE="$HOME/nixos-dotfiles"
 TARGET_BASE="$HOME/.config"
+TARGET_FOR_NIXOS="/etc"
 
 # Directories to link
 DIRS_TO_REPLACE=(rofi qtile alacritty)
+
+DIRS_TO_REPLACE_FOR_NIXOS=(nixos)
+
 # Files to link
 FILES_TO_REPLACE=()
 
@@ -13,6 +17,20 @@ section "Linking Directories"
 for DIR_NAME in "${DIRS_TO_REPLACE[@]}"; do
   SRC="$SOURCE_BASE/$DIR_NAME"
   DEST="$TARGET_BASE/$DIR_NAME"
+  if [ ! -d "$SRC" ]; then
+    warn "Source directory does not exist: $SRC"
+    continue
+  fi
+  [ -L "$DEST" ] && rm "$DEST"
+  [ -d "$DEST" ] && rm -rf "$DEST"
+  ln -s "$SRC" "$DEST"
+  success "Linked $SRC to $DEST"
+done
+
+section "Linking Directories For Nix OS"
+for DIR_NAME in "${DIRS_TO_REPLACE[@]}"; do
+  SRC="$SOURCE_BASE/$DIR_NAME"
+  DEST="$TARGET_FOR_NIXOS/$DIR_NAME"
   if [ ! -d "$SRC" ]; then
     warn "Source directory does not exist: $SRC"
     continue
