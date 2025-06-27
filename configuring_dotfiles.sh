@@ -1,0 +1,40 @@
+#!/bin/bash
+
+# Base paths
+SOURCE_BASE="$HOME/nixos-dotfiles"
+TARGET_BASE="$HOME/.config"
+
+# Directories to link
+DIRS_TO_REPLACE=(rofi qtile alacritty)
+# Files to link
+FILES_TO_REPLACE=()
+
+section "Linking Directories"
+for DIR_NAME in "${DIRS_TO_REPLACE[@]}"; do
+  SRC="$SOURCE_BASE/$DIR_NAME"
+  DEST="$TARGET_BASE/$DIR_NAME"
+  if [ ! -d "$SRC" ]; then
+    warn "Source directory does not exist: $SRC"
+    continue
+  fi
+  [ -L "$DEST" ] && rm "$DEST"
+  [ -d "$DEST" ] && rm -rf "$DEST"
+  ln -s "$SRC" "$DEST"
+  success "Linked $SRC to $DEST"
+done
+
+section "Linking Files"
+for FILE_NAME in "${FILES_TO_REPLACE[@]}"; do
+  SRC="$SOURCE_BASE/$FILE_NAME"
+  DEST="$TARGET_BASE/$FILE_NAME"
+  if [ ! -f "$SRC" ]; then
+    warn "Source file does not exist: $SRC"
+    continue
+  fi
+  [ -L "$DEST" ] && rm "$DEST"
+  [ -f "$DEST" ] && rm -f "$DEST"
+  ln -s "$SRC" "$DEST"
+  success "Linked $SRC to $DEST"
+done
+
+echo -e "${GREEN}${BOLD}All config files and directories are now linked!${NC}"
