@@ -1,0 +1,36 @@
+/* =============================================================================
+ *                           STECORE DOTFILES
+ * =============================================================================
+ * Rofi Application Launcher Configuration
+ * A fast and customizable application launcher
+ * 
+ * Features:
+ * - Custom font configuration
+ * - Dynamic theme integration
+ * - Modular configuration structure
+ * - Theme selector with SUPER+SHIFT+E
+ * ============================================================================= */
+
+/* =============================================================================
+ * GLOBAL FONT CONFIGURATION
+ * =============================================================================
+ * Import shared font settings for consistent typography
+ */
+@import "~/.config/rofi/0-shared-fonts.rasi"
+
+/* =============================================================================
+ * COLOR SCHEME INTEGRATION
+ * =============================================================================
+ * Uncomment the line below to enable dynamic color scheme from pywal
+ * This will automatically match your desktop color scheme
+ */
+// @import "~/.cache/wal/colors-rofi-dark.rasi"
+
+/* =============================================================================
+ * THEME CONFIGURATION
+ * =============================================================================
+ * Main themes are located in ~/.config/rofi/themes directory
+ * You can manually change the theme here or use the theme selector
+ * Theme selector shortcut: SUPER + SHIFT + E
+ */
+@theme "~/.config/rofi/themes/sten.rasi"

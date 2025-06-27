@@ -1,0 +1,113 @@
+# import = [
+#   "~/.cache/wal/colors-alacritty.toml",
+#   "~/.config/alacritty/fonts.toml"
+# ]
+
+[general]
+# Import external configuration files (ensure these paths exist and are valid)
+
+# Live config reload
+live_config_reload = true
+
+# Offer IPC using alacritty msg
+ipc_socket = true
+
+[env]
+TERM = "alacritty"
+WINIT_X11_SCALE_FACTOR = "1.0"
+
+# WINDOW ---------------------------------------------------------
+[window]
+dynamic_padding = true
+decorations = "full" # Set to "none" for no window decorations
+opacity = 0.9
+blur = true
+startup_mode = "Windowed"
+dynamic_title = true
+class = { instance = "Alacritty", general = "Alacritty" }
+
+[font]
+size = 18
+
+[font.normal]
+style = "Regular"
+family = "MesloLGS Nerd Font"
+
+[font.bold]
+style = "Bold"
+family = "MesloLGS Nerd Font"
+
+[font.italic]
+style = "Italic"
+family = "MesloLGS Nerd Font"
+
+[font.bold_italic]
+style = "Bold Italic"
+family = "MesloLGS Nerd Font"
+
+# Number of lines/columns (not pixels) in the terminal
+[window.dimensions]
+columns = 95
+lines = 24
+
+# Blank space added around the window in pixels
+[window.padding]
+x = 5
+y = 5
+
+# SCROLLING ------------------------------------------------------
+[scrolling]
+history = 10000
+multiplier = 3
+
+# BELL -----------------------------------------------------------
+[bell]
+animation = "Linear"
+duration = 20
+command = { program = "paplay", args = ["/usr/share/sounds/freedesktop/stereo/dialog-error.oga"] }
+
+# SELECTION ------------------------------------------------------
+[selection]
+save_to_clipboard = true
+
+# CURSOR ---------------------------------------------------------
+[cursor]
+vi_mode_style = "None" # Compatible with Alacritty 0.10.0+
+blink_interval = 750
+blink_timeout = 5
+unfocused_hollow = true
+thickness = 0.20
+
+[cursor.style]
+shape = "Block"
+blinking = "On"
+
+# COLORS ---------------------------------------------------------
+# Example selection colors (replace with values from your wal-generated file)
+[colors.selection]
+background = "#123456" # Replace with your desired color
+foreground = "#abcdef" # Replace with your desired color
+
+# MOUSE ----------------------------------------------------------
+[mouse]
+hide_when_typing = false # Set to true to hide cursor when typing
+
+# HINTS ----------------------------------------------------------
+[[hints.enabled]]
+command = "xdg-open"
+hyperlinks = true
+post_processing = true
+persist = false
+mouse.enabled = true
+binding = { key = "U", mods = "Control|Shift" }
+regex = "(ipfs:|ipns:|magnet:|mailto:|gemini://|gopher://|https://|http://|news:|file:|git://|ssh:|ftp://)[^-\u001F\u007F-\u009F<>\"\\s{-}\\^⟨⟩‘]+"
+
+# DEBUG ----------------------------------------------------------
+[debug]
+render_timer = false
+persistent_logging = false
+log_level = "Warn"
+renderer = "None"
+print_events = false
+highlight_damage = false
+prefer_egl = false
