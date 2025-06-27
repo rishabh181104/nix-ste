@@ -41,6 +41,17 @@
   #   useXkbConfig = true; # use xkb.options in tty.
   # };
 
+  #
+  # Setup for Hyprland
+  programs.hyprland = {
+  	enable = true;
+	xwayland = true;
+};
+
+  enviromental.sessionVariables = {
+  	NIXOS_OZONE_WL = "1";
+};
+
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
   services.xserver = {
@@ -58,6 +69,11 @@
 	xwallpaper --zoom ~/Wallpapers/Pictures/Concept-Japanese\ house.png
 	xset r rate 200 35 &
 	'';
+};
+
+  services.displayManager.sddm = {
+  	enable = true;
+	wayland.enable = true;
 };
 
 
@@ -103,32 +119,127 @@
   # You can use https://search.nixos.org/ to find more packages (and options).
   programs.ssh.startAgent = true;
  environment.systemPackages = with pkgs; [
+ ##
+ ## Packages for Hyprland
+ ##
+ 	hyprland
+	hypridle
+	hyprland-qt-support
+	hyprland-qtutils
+	hyprlock
+	hyprpicker
+	xdg-desktop-portal
+	xdg-desktop-portal-wlr
+	xdg-desktop-portal-hyprland
+	waybar
+	wlogout
+	wlroots_0_19
+	swww
+	rose-pine-hyprcursor
+	libsForQt5.xwaylandvideobridge
+	xwayland-run
+	mako
+	pavucontrol
+	flat-remix-gtk
+	papirus-icon-theme
+
+ ##
+ ## Packages for Kernel and Signing Kernel
+ ##
+	sbctl
+	mokutil
+	openssl
+	linuxHeaders
+	mkinitcpio-nfs-utils
+	linuxKernel.kernels.linux_zen
+
+ ##
+ ## Packages for daily-use as in office use
+ ##
+	stirling-pdf
+	thunderbird
+	libreoffice-fresh
+	whasie
+
+ ##
+ ## Packages for browsers or are browsers
+ ##
+	google-chrome
+ ##
+ ## Packages for Bluetooth
+ ##
+	blueman
+	bluez
+	bluez-tools
+
+ ##
+ ## Packages for Shell
+ ##
+	fish
+	starship
+
+ ##
+ ## Packages for Nework
+ ##
+	networkmanager
+
+ ##
+ ## Packages for Screenshot
+ ##
+	grim
+	grimblast
+	slurp
+ ##
+ ## Packages for Editors
+ ##
 	vim 
-  	wget
    	neovim
+  	wget
+	fzf
+
+ ##
+ ## Packages for Terminals and some daily use terminal based packages
+ ##
    	alacritty
+	foot
+	kitty
 	btop
 	bat
-	fastfetch
-	git
-	xwallpaper
-	pcmanfm
-	vlc
-	mupdf
+	bc
 	brightnessctl
-	rofi
 	ripgrep
-	python3Full
-	nodejs_24
-	lazygit
 	keychain
 	wl-clipboard
 	xclip
 	gnome-keyring
+	fastfetch
+	lazygit
+	git
+
+ ##
+ ## Packages for Xorg/qtile
+ ##
+	python313Packages.qtile-extras
+	xwallpaper
+	pcmanfm
+	vlc
+	mupdf
+	rofi-wayland
+
+ ##
+ ## Packages like programming languages and packages for development
+ ##
+	python3Full
+	nodejs_24
+	go
+	rustup
+	pipx
  ];
 
  fonts.packages = with pkgs; [
  	meslo-lgs-nf
+	font-awesome
+	nerd-fonts.dejavu-sans-mono
 	];
 
   # Some programs need SUID wrappers, can be configured further or are
