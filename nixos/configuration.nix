@@ -26,6 +26,20 @@
   hardware.enableRedistributableFirmware = true;
   boot.kernelModules = [ "iwlwifi" ];
 
+  ## For NVIDIA
+  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
+  hardware.opengl.enable = true;
+  hardware.opengl.driSupport = true;
+  hardware.opengl.driSupport32Bit = true; # For 32-bit applications
+  hardware.nvidia.nvidiaSettings = true; # Enables nvidia-settings tool
+  hardware.nvidia.powerManagement.enable = true; # Optional, for power management
+  boot.blacklistedKernelModules = [ "nouveau" ];
+  hardware.nvidia.prime = {
+  sync.enable = true;
+  # nvidiaBusId = "PCI:1:0:0"; # Replace with your NVIDIA GPU's PCI ID
+  # intelBusId = "PCI:0:2:0";  # Replace with your Intel GPU's PCI ID
+  };
+
   networking.hostName = "nix-ste"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;
@@ -62,6 +76,7 @@
   # services.xserver.enable = true;
   services.xserver = {
 	enable = true;
+	videoDrivers = [ "nvidia" ];
 	windowManager.qtile.enable = true;
 	displayManager.sessionCommands = ''
 	xrandr --output eDP-1 --mode "1920x1080" --rate "60.01"
@@ -261,6 +276,12 @@
 	pipx
 	python313Packages.pip
 	python313Packages.virtualenv
+
+ ##
+ ## Packages for Nvidia
+ ##
+ 	vulkan-loader
+	vulkan-tools
  ];
 
  fonts.packages = with pkgs; [
