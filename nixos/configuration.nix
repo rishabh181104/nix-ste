@@ -156,6 +156,7 @@
 	qt6.qtvirtualkeyboard
 	qt6.qtmultimedia
 	imagemagick
+	nwg-look
 
  ##
  ## Packages for Browsers
@@ -179,7 +180,12 @@
 	stirling-pdf
 	thunderbird
 	libreoffice-fresh
+
+##
+## Social Media or Chatting apps
+##
 	whatsie
+	discord
 
  ##
  ## Packages for Bluetooth
@@ -209,6 +215,7 @@
  ##
  ## Packages for Editors
  ##
+ 	code-cursor
 	vim 
    	neovim
   	wget
