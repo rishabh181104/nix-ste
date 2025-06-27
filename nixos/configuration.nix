@@ -27,18 +27,16 @@
   boot.kernelModules = [ "iwlwifi" ];
 
   ## For NVIDIA
-  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
-  hardware.opengl.enable = true;
-  hardware.opengl.driSupport = true;
-  hardware.opengl.driSupport32Bit = true; # For 32-bit applications
-  hardware.nvidia.nvidiaSettings = true; # Enables nvidia-settings tool
-  hardware.nvidia.powerManagement.enable = true; # Optional, for power management
-  boot.blacklistedKernelModules = [ "nouveau" ];
-  hardware.nvidia.prime = {
-  sync.enable = true;
-  # nvidiaBusId = "PCI:1:0:0"; # Replace with your NVIDIA GPU's PCI ID
-  # intelBusId = "PCI:0:2:0";  # Replace with your Intel GPU's PCI ID
-  };
+  # hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
+  # hardware.opengl.enable = true;
+  # hardware.nvidia.nvidiaSettings = true; # Enables nvidia-settings tool
+  # hardware.nvidia.powerManagement.enable = true; # Optional, for power management
+  # boot.blacklistedKernelModules = [ "nouveau" ];
+  # hardware.nvidia.prime = {
+  # sync.enable = true;
+  # # nvidiaBusId = "PCI:1:0:0"; # Replace with your NVIDIA GPU's PCI ID
+  # # intelBusId = "PCI:0:2:0";  # Replace with your Intel GPU's PCI ID
+  # };
 
   networking.hostName = "nix-ste"; # Define your hostname.
   # Pick only one of the below networking options.
@@ -76,7 +74,6 @@
   # services.xserver.enable = true;
   services.xserver = {
 	enable = true;
-	videoDrivers = [ "nvidia" ];
 	windowManager.qtile.enable = true;
 	displayManager.sessionCommands = ''
 	xrandr --output eDP-1 --mode "1920x1080" --rate "60.01"
@@ -91,6 +88,14 @@
 	xset r rate 200 35 &
 	'';
 };
+
+ services.xserver.videoDrivers = [ "nvidia" ];
+
+  # Explicitly enable or disable open-source kernel modules
+  hardware.nvidia = {
+    # open = true; # Use open-source kernel modules (recommended for RTX/GTX 16xx GPUs)
+    open = false; # Use proprietary kernel modules (uncomment if needed for older GPUs)
+  };
 
   services.displayManager.sddm = {
   	enable = true;
@@ -232,14 +237,29 @@
  ##
  	code-cursor
 	vim 
-   	neovim
-  	wget
+  neovim
+  wget
 	fzf
+  gnumake
+  unzip
+  lua-language-server
+  stylua
+  llvmPackages_20.libcxxClang
+  astyle
+  jdt-language-server
+  python313Packages.debugpy
+  vimPlugins.vim-ipython
+  rPackages.autoimport
+  python313Packages.black
+  postgresql
+  gdb
+  shfmt
+  shellcheck
 
  ##
  ## Packages for Terminals and some daily use terminal based packages
  ##
-   	alacritty
+  alacritty
 	foot
 	kitty
 	btop
