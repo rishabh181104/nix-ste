@@ -1,5 +1,28 @@
 #!/bin/sh
 
+# Define color codes
+GREEN='\033[0;32m'
+BOLD='\033[1m'
+NC='\033[0m' # No Color
+
+# Define logging functions
+warn() {
+  echo -e "\033[0;33mWARNING: $1\033[0m" >&2
+}
+
+section() {
+  echo -e "${BOLD}=== $1 ===${NC}"
+}
+
+success() {
+  echo -e "${GREEN}$1${NC}"
+}
+
+fail() {
+  echo -e "\033[0;31mERROR: $1\033[0m" >&2
+  exit 1
+}
+
 # Check if running as root
 #
 if [ "$EUID" -ne 0 ]; then

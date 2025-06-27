@@ -1,36 +1,27 @@
 #!/bin/sh
 
-# =============================
-#        STECORE BANNER
-# =============================
-echo -e "\033[1;35m"
-cat <<'EOF'
-    ╔══════════════════════════════════════════════════════════════╗
-    ║                                                              ║
-    ║                    🚀  STECORE  🚀                           ║
-    ║                                                              ║
-    ║              ⚡ Your Ultimate Dotfiles Setup ⚡               ║
-    ║                                                              ║
-    ║                    🎨 Powered by Hyprland 🎨                 ║
-    ║                                                              ║
-    ╚══════════════════════════════════════════════════════════════╝
-EOF
-echo -e "\033[0m"
-
-# Color variables for output
-RED='\033[0;31m'
+# Define color codes
 GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-CYAN='\033[0;36m'
 BOLD='\033[1m'
-NC='\033[0m'
+NC='\033[0m' # No Color
 
-section() { echo -e "\n${CYAN}${BOLD}==> $1${NC}"; }
-success() { echo -e "${GREEN}✔ $1${NC}"; }
-fail() { echo -e "${RED}✖ $1${NC}"; }
-warn() { echo -e "${YELLOW}! $1${NC}"; }
+# Define logging functions
+warn() {
+  echo -e "\033[0;33mWARNING: $1\033[0m" >&2
+}
 
-set -e
+section() {
+  echo -e "${BOLD}=== $1 ===${NC}"
+}
+
+success() {
+  echo -e "${GREEN}$1${NC}"
+}
+
+fail() {
+  echo -e "\033[0;31mERROR: $1\033[0m" >&2
+  exit 1
+}
 
 REPO_URL="https://gitlab.com/phoneybadger/pokemon-colorscripts.git"
 CLONE_DIR="/tmp/pokemon-colorscripts"

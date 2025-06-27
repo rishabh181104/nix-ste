@@ -1,5 +1,28 @@
 #!/usr/bin/sh
 
+# Define color codes
+GREEN='\033[0;32m'
+BOLD='\033[1m'
+NC='\033[0m' # No Color
+
+# Define logging functions
+warn() {
+  echo -e "\033[0;33mWARNING: $1\033[0m" >&2
+}
+
+section() {
+  echo -e "${BOLD}=== $1 ===${NC}"
+}
+
+success() {
+  echo -e "${GREEN}$1${NC}"
+}
+
+fail() {
+  echo -e "\033[0;31mERROR: $1\033[0m" >&2
+  exit 1
+}
+
 # Ensure we're in a Git repository
 if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
   echo "Error: Not in a Git repository. Run this script from a repository directory."
