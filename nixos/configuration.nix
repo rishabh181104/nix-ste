@@ -22,6 +22,7 @@
   };
 
   nixpkgs.config.allowUnfree = true;
+  programs.fish.enable = true;
 
   networking.hostName = "nix-ste"; # Define your hostname.
   # Pick only one of the below networking options.
