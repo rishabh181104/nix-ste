@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Function to format speed in human-readable units
 format_speed() {
