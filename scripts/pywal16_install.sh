@@ -1,41 +1,7 @@
 #!/bin/bash
 
-# =============================
-#        STECORE BANNER
-# =============================
-echo -e "\033[1;35m"
-cat <<'EOF'
-    ╔══════════════════════════════════════════════════════════════╗
-    ║                                                              ║
-    ║                    🚀  STECORE  🚀                           ║
-    ║                                                              ║
-    ║              ⚡ Your Ultimate Dotfiles Setup ⚡               ║
-    ║                                                              ║
-    ║                    🎨 Powered by Hyprland 🎨                 ║
-    ║                                                              ║
-    ╚══════════════════════════════════════════════════════════════╝
-EOF
-echo -e "\033[0m"
-
-# Color variables for output
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-CYAN='\033[0;36m'
-BOLD='\033[1m'
-NC='\033[0m'
-
-section() { echo -e "\n${CYAN}${BOLD}==> $1${NC}"; }
-success() { echo -e "${GREEN}✔ $1${NC}"; }
-fail() { echo -e "${RED}✖ $1${NC}"; }
-warn() { echo -e "${YELLOW}! $1${NC}"; }
-
 section "Installing pywal16 in a virtual environment"
 
-section "Updating package list and installing dependencies"
-paru > /dev/null 2>&1 || warn "Package list update failed"
-paru --noconfirm -S --needed python python-pip python-virtualenv git imagemagick > /dev/null 2>&1 || { fail "Failed to install dependencies."; exit 1; }
-success "Dependencies installed."
 
 section "Creating virtual environment"
 rm -rf ~/pywal16-env

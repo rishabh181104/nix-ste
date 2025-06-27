@@ -149,6 +149,7 @@
 	qt6.qtsvg
 	qt6.qtvirtualkeyboard
 	qt6.qtmultimedia
+	imagemagic
 
  ##
  ## Packages for Browsers
@@ -244,6 +245,8 @@
 	go
 	rustup
 	pipx
+	python313Packages.pip
+	python313Packages.virtualenv
  ];
 
  fonts.packages = with pkgs; [
