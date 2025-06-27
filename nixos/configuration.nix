@@ -27,7 +27,34 @@
   networking.hostName = "nix-ste"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+
+  networking = {
+  hostName = "nix-ste";
+  networkmanager.enable = true; # Optional: Use NetworkManager for easier management
+  interfaces = {
+    # Wired interface (e.g., eth0)
+    enp0s31f6 = {
+      useDHCP = true; # Use DHCP for wired connection
+    };
+    # Wireless interface (e.g., wlan0)
+    wlan0s20f3 = {
+      useDHCP = true; # Use DHCP for wireless
+    };
+  };
+  # Enable wireless networking
+  wireless = {
+    enable = true;
+    interfaces = [ "wlan0s20f3" ];
+    networks = {
+      "Star 5G" = {
+        psk = "12341234"; # Use plaintext password
+        # Alternatively, use pskRaw for hashed passwords
+        # pskRaw = "your-hashed-password";
+      };
+    };
+  };
+};
 
   # Set your time zone.
  time.timeZone = "Asia/Kolkata";
