@@ -149,7 +149,7 @@
 	qt6.qtsvg
 	qt6.qtvirtualkeyboard
 	qt6.qtmultimedia
-	imagemagic
+	imagemagick
 
  ##
  ## Packages for Browsers
