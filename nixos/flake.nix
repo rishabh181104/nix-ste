@@ -1,21 +1,24 @@
 {
+  description = "My NixOS configuration with Zen Browser and Google Chrome";
 
-	description = "My first flake";
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    zen-browser.url = "github:youwen5/zen-browser-flake";
+    zen-browser.inputs.nixpkgs.follows = "nixpkgs";
+  };
 
-	inputs = {
-		nixpkgs.url = "nixpkgs/nixos-unstable";
-	};
-
-	outputs = { self, nixpkgs, ...}:
-	let
-		lib = nixpkgs.lib;
-	in {
-		nixosConfigurations = {
-			nix-ste = lib.nixosSystem {
-			system = "x86_64-linux";
-			modules = [ ./configuration.nix ];
-			};
-		};
-	};
-
+  outputs = { self, nixpkgs, zen-browser, ... }@inputs:  # Add @inputs here
+  let
+    system = "x86_64-linux"; # Adjust to "aarch64-linux" if on ARM
+    pkgs = import nixpkgs { inherit system; config.allowUnfree = true; };
+  in
+  {
+    nixosConfigurations.nix-ste = nixpkgs.lib.nixosSystem {  # Changed to "nix-ste" based on error
+      inherit system;
+      specialArgs = { inherit inputs; };  # Now inputs is defined
+      modules = [
+        ./configuration.nix
+      ];
+    };
+  };
 }

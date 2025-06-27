@@ -2,7 +2,7 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 {
   imports =
@@ -20,6 +20,8 @@
     dates = "weekly";
     options = "--delete-older-than 8";
   };
+
+  nixpkgs.config.allowUnfree = true;
 
   networking.hostName = "nix-ste"; # Define your hostname.
   # Pick only one of the below networking options.
@@ -45,12 +47,12 @@
   # Setup for Hyprland
   programs.hyprland = {
   	enable = true;
-	xwayland = true;
+	xwayland.enable = true;
 };
 
-  enviromental.sessionVariables = {
-  	NIXOS_OZONE_WL = "1";
-};
+#   enviroment.sessionVariables = {
+#   	NIXOS_OZONE_WL = "1";
+# };
 
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
@@ -142,6 +144,17 @@
 	pavucontrol
 	flat-remix-gtk
 	papirus-icon-theme
+	jamesdsp
+	qt6.qtbase
+	qt6.qtsvg
+	qt6.qtvirtualkeyboard
+	qt6.qtmultimedia
+
+ ##
+ ## Packages for Browsers
+ ##
+ 	google-chrome
+	inputs.zen-browser.packages.${pkgs.system}.default
 
  ##
  ## Packages for Kernel and Signing Kernel
@@ -159,12 +172,8 @@
 	stirling-pdf
 	thunderbird
 	libreoffice-fresh
-	whasie
+	whatsie
 
- ##
- ## Packages for browsers or are browsers
- ##
-	google-chrome
  ##
  ## Packages for Bluetooth
  ##
@@ -182,6 +191,7 @@
  ## Packages for Nework
  ##
 	networkmanager
+	networkmanagerapplet
 
  ##
  ## Packages for Screenshot
