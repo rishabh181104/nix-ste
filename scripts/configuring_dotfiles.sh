@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Base paths
 SOURCE_BASE="$HOME/nixos-dotfiles"

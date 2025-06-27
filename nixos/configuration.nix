@@ -23,6 +23,8 @@
 
   nixpkgs.config.allowUnfree = true;
   programs.fish.enable = true;
+  hardware.enableRedistributableFirmware = true;
+  boot.kernelModules = [ "iwlwifi" ];
 
   networking.hostName = "nix-ste"; # Define your hostname.
   # Pick only one of the below networking options.
@@ -111,9 +113,11 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.ste = {
     isNormalUser = true;
+    shell = pkgs.fish;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
-      tree
+	fish
+	tree
     ];
   };
 

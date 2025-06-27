@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 section "Installing pywal16 in a virtual environment"
 
