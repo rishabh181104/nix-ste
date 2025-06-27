@@ -19,7 +19,7 @@
 if status is-interactive
   # Run ASCII art generation script and then fastfetch
   if test -f ~/.config/fish/scripts/generate_ascii.sh
-    bash ~/.config/fish/scripts/generate_ascii.sh && fastfetch
+    fish ~/.config/fish/scripts/generate_ascii.sh && fastfetch
   else
     echo "Warning: generate_ascii.sh not found, running fastfetch without custom ASCII art"
     fastfetch
