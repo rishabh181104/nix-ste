@@ -6,11 +6,11 @@ TARGET_BASE="$HOME/.config"
 TARGET_FOR_NIXOS="/etc"
 
 # Directories to link
-DIRS_TO_REPLACE=(rofi qtile alacritty)
+DIRS_TO_REPLACE=(alacritty foot mako rofi wal fastfetch hypr waybar fish kitty qtile wlogout)
 DIRS_TO_REPLACE_FOR_NIXOS=(nixos)
 
 # Files to link
-FILES_TO_REPLACE=()
+FILES_TO_REPLACE=(starship.toml)
 
 section "Linking Directories"
 for DIR_NAME in "${DIRS_TO_REPLACE[@]}"; do

@@ -1,0 +1,58 @@
+# =============================================================================
+#                           STECORE DOTFILES
+# =============================================================================
+# Mako Notification Daemon Configuration
+# A lightweight notification daemon for Wayland
+# 
+# Features:
+# - Dracula Darker theme integration
+# - Custom font with Nerd Font icons
+# - Different styles for notification urgency levels
+# - Progress bar support for long-running tasks
+# - Positioned in top-right corner
+# =============================================================================
+
+# =============================================================================
+# GLOBAL NOTIFICATION SETTINGS
+# =============================================================================
+font=MesloLGS Nerd Font Mono 14  # Font family and size
+margin=20                        # Margin from screen edges
+default-timeout=5000             # Default notification timeout (5 seconds)
+border-size=1                    # Border thickness
+border-radius=4                  # Corner rounding
+anchor=top-right                 # Position on screen
+layer=overlay                    # Display layer
+width=250                        # Notification width
+
+# =============================================================================
+# VISUAL APPEARANCE (Dracula Darker Theme)
+# =============================================================================
+background-color=#12121d         # Dark background
+border-color=#282a36             # Border color
+border-size=2                    # Border thickness
+padding=10                       # Internal padding
+text-color=#f8f8f2              # Text color
+width=300                        # Notification width
+height=100                       # Notification height
+margin=10                        # Margin from screen edges
+border-radius=6                  # Corner rounding
+
+# =============================================================================
+# PROGRESS BAR STYLING
+# =============================================================================
+progress-color=#50fa7b           # Green progress bar for long-running tasks
+
+# =============================================================================
+# URGENCY-BASED STYLING
+# =============================================================================
+# Critical notifications (errors, warnings)
+[urgency=critical]
+background-color=#ff5555         # Red background for critical notifications
+border-color=#ff6e6e             # Red border
+text-color=#f8f8f2              # White text
+
+# Low priority notifications (info, debug)
+[urgency=low]
+background-color=#282a36         # Darker background for low priority
+border-color=#44475a             # Subtle border
+text-color=#6272a4              # Muted text color

@@ -1,0 +1,92 @@
+/* STECORE DOTFILES - Wlogout Power Menu Styling */
+/* A beautiful and modern logout menu for Wayland */
+
+/* Main window styling */
+window {
+  font-size: 24pt;
+  color: @foreground; /* Text color from pywal */
+  background-color: rgba(30, 30, 46, 0.8); /* Semi-transparent dark background */
+}
+
+/* Button base styling - Common styling for all power menu buttons */
+button {
+  background-repeat: no-repeat; /* Don't repeat background images */
+  background-position: center; /* Center background images */
+  background-size: 20%; /* Initial icon size */
+  background-color: rgba(200, 220, 255, 0); /* Transparent background */
+  animation: gradient_f 10s ease-in infinite; /* Continuous gradient animation */
+  transition: all 0.3s cubic-bezier(.55, 0.0, .28, 1.682), box-shadow 0.2s ease-in-out, background-color 0.2s ease-in-out; /* Smooth transitions */
+  border-radius: 80px; /* Fully rounded buttons */
+  border: 0px; /* No border */
+  outline-style: none; /* No outline */
+}
+
+/* Button focus state - Styling when button is focused */
+button:focus {
+  background-size: 50%; /* Larger icon when focused */
+  border: 0px;
+  outline-style: none;
+}
+
+/* Button hover state - Styling when mouse hovers over buttons */
+button:hover {
+  background-color: transparent; /* Keep background transparent */
+  /* color: @color13; */ /* Commented out color change */
+  background-size: 50%; /* Scale up icon on hover */
+  margin: 30px; /* Add margin for visual effect */
+  border-radius: 80px; /* Maintain rounded corners */
+  outline-style: none; /* No outline */
+}
+
+/* Button text styling - Styling for text content inside buttons */
+button span {
+  font-size: 1.2em; /* Increase font size for better readability */
+}
+
+/* Lock screen button - Lock the system screen */
+#lock {
+  background-image: image(url("./icons/lock.png")); /* Lock icon */
+}
+#lock:hover {
+  background-image: image(url("./icons/lock-hover.png")); /* Hover state icon */
+}
+
+/* Logout button - End current user session */
+#logout {
+  background-image: image(url("./icons/logout.png")); /* Logout icon */
+}
+#logout:hover {
+  background-image: image(url("./icons/logout-hover.png")); /* Hover state icon */
+}
+
+/* Suspend button - Put system to sleep (suspend to RAM) */
+#suspend {
+  background-image: image(url("./icons/sleep.png")); /* Sleep icon */
+}
+#suspend:hover {
+  background-image: image(url("./icons/sleep-hover.png")); /* Hover state icon */
+}
+
+/* Shutdown button - Power off the system completely */
+#shutdown {
+  background-image: image(url("./icons/power.png")); /* Power icon */
+}
+#shutdown:hover {
+  background-image: image(url("./icons/power-hover.png")); /* Hover state icon */
+}
+
+/* Reboot button - Restart the system */
+#reboot {
+  background-image: image(url("./icons/restart.png")); /* Restart icon */
+}
+#reboot:hover {
+  background-image: image(url("./icons/restart-hover.png")); /* Hover state icon */
+}
+
+/* Hibernate button - Hibernate system (suspend to disk) */
+#hibernate {
+  background-image: image(url("./icons/hibernate.png")); /* Hibernate icon */
+}
+#hibernate:hover {
+  background-image: image(url("./icons/hibernate-hover.png")); /* Hover state icon */
+} 

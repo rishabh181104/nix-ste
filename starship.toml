@@ -1,0 +1,178 @@
+# =============================================================================
+#                           STECORE DOTFILES
+# =============================================================================
+# Starship Prompt Configuration
+# A fast, customizable, and informative shell prompt
+# 
+# Features:
+# - Midnight blue and reddish-pink color scheme
+# - Git integration with branch and status display
+# - Programming language version indicators
+# - Docker context display
+# - Command duration tracking
+# - Directory path with smart truncation
+# - Time display on the right side
+# =============================================================================
+
+# =============================================================================
+# MAIN PROMPT FORMAT
+# =============================================================================
+# Left side: directory, git info, programming languages, docker context
+# Right side: command duration and time
+format = """
+[](#1C2526)\
+    $directory\
+    [](fg:#1C2526 bg:#2E3A3C)\
+    $git_branch\
+    $git_status\
+    [](fg:#2E3A3C bg:#FF5C8A)\
+    $c\
+    $elixir\
+    $elm\
+    $golang\
+    $haskell\
+    $java\
+    $julia\
+    $nodejs\
+    $nim\
+    $rust\
+    [](fg:#FF5C8A bg:#D81B60)\
+    $docker_context\
+    [](fg:#D81B60)\
+    """
+# Right side format with pointy separators
+    right_format = """
+    [](fg:#B71C4C bg:#B71C4C)\
+      $cmd_duration\
+      [](fg:#1C2526 bg:#B71C4C)\
+      $time\
+      """
+
+# =============================================================================
+# GLOBAL SETTINGS
+# =============================================================================
+      command_timeout = 5000  # Timeout for command execution
+      add_newline = true      # Add newline before prompt
+
+# =============================================================================
+# DIRECTORY MODULE
+# =============================================================================
+      [directory]
+      style = "bg:#1C2526"
+      format = "[ $path ]($style)"
+      truncation_length = 3      # Show only last 3 path components
+      truncation_symbol = "…/"   # Symbol for truncated paths
+
+# Custom icons for common directories
+      [directory.substitutions]
+      "Documents" = " "
+      "Downloads" = " "
+      "Music" = " "
+      "Pictures" = " "
+
+# =============================================================================
+# PROGRAMMING LANGUAGE MODULES
+# =============================================================================
+# C/C++ language indicator
+      [c]
+      symbol = " "
+      style = "bg:#FF5C8A"
+      format = '[ $symbol ($version) ]($style)'
+
+# Elixir language indicator
+      [elixir]
+      symbol = " "
+      style = "bg:#FF5C8A"
+      format = '[ $symbol ($version) ]($style)'
+
+# Elm language indicator
+      [elm]
+      symbol = " "
+      style = "bg:#FF5C8A"
+      format = '[ $symbol ($version) ]($style)'
+
+# Go language indicator
+      [golang]
+      symbol = " "
+      style = "bg:#FF5C8A"
+      format = '[ $symbol ($version) ]($style)'
+
+# Haskell language indicator
+      [haskell]
+      symbol = " "
+      style = "bg:#FF5C8A"
+      format = '[ $symbol ($version) ]($style)'
+
+# Java language indicator
+      [java]
+      symbol = " "
+      style = "bg:#FF5C8A"
+      format = '[ $symbol ($version) ]($style)'
+
+# Julia language indicator
+      [julia]
+      symbol = " "
+      style = "bg:#FF5C8A"
+      format = '[ $symbol ($version) ]($style)'
+
+# Node.js language indicator
+      [nodejs]
+      symbol = ""
+      style = "bg:#FF5C8A"
+      format = '[ $symbol ($version) ]($style)'
+
+# Nim language indicator
+      [nim]
+      symbol = " "
+      style = "bg:#FF5C8A"
+      format = '[ $symbol ($version) ]($style)'
+
+# Rust language indicator
+      [rust]
+      symbol = ""
+      style = "bg:#FF5C8A"
+      format = '[ $symbol ($version) ]($style)'
+
+# Python virtual environment (minimal display)
+      [python]
+      style = "bg:#1C2526"
+      format = '[(\($virtualenv\) )]($style)'
+
+# =============================================================================
+# GIT INTEGRATION
+# =============================================================================
+# Git branch display
+      [git_branch]
+      symbol = ""
+      style = "bg:#2E3A3C"
+      format = '[ $symbol $branch ]($style)'
+
+# Git status indicators (staged, modified, untracked, etc.)
+      [git_status]
+      style = "bg:#2E3A3C"
+      format = '[$all_status$ahead_behind ]($style)'
+
+# =============================================================================
+# DOCKER INTEGRATION
+# =============================================================================
+# Docker context display
+      [docker_context]
+      symbol = " "
+      style = "bg:#D81B60"
+      format = '[ $symbol $context ]($style) $path'
+
+# =============================================================================
+# UTILITY MODULES
+# =============================================================================
+# Time display (disabled by default)
+      [time]
+      disabled = true
+      time_format = "%R"         # 24-hour format
+      style = "bg:#1C2526"
+      format = '[ $time ]($style)'
+
+# Command duration tracking
+      [cmd_duration]
+      min_time = 500             # Only show for commands taking >500ms
+      style = "bg:#B71C4C"
+      format = '[ ⏱ $duration ]($style)'
