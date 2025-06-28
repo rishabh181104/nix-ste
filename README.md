@@ -23,13 +23,11 @@ This repo is a collection of dotfiles and scripts for NixOS, with a focus on:
 ## Screenshots
 See what your system can look like with these configs!
 
-**Screenshots Folder:** [`screenshots/`](./screenshots/)
 
 | Hyprland Desktop | Qtile Desktop | Themed Terminal |
 |------------------|--------------|-----------------|
 | ![Hyprland](screenshots/hyprland.png) | ![Qtile](screenshots/qtile.png) | ![Terminal](screenshots/terminal.png) |
 
-> _Add your own screenshots to the `screenshots/` folder!_
 
 ---
 
