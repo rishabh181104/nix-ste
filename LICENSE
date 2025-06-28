@@ -1,0 +1,12 @@
+GNU GENERAL PUBLIC LICENSE
+Version 3, 29 June 2007
+
+Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>
+Everyone is permitted to copy and distribute verbatim copies
+of this license document, but changing it is not allowed.
+
+---
+
+This repository includes code and configuration files for NixOS, various Linux desktop environments, and third-party scripts such as ani-cli (GPL-3.0). By including ani-cli, the repository as a whole is distributed under the terms of the GNU General Public License v3.0. See individual files for additional license information where applicable.
+
+For the full license text, see: https://www.gnu.org/licenses/gpl-3.0.txt 
