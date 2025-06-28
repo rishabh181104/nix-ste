@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -e
+
 # Define color codes
 GREEN='\033[0;32m'
 BOLD='\033[1m'
@@ -15,7 +17,7 @@ section() {
 }
 
 success() {
-  echo -e "${GREEN}$1${NC}"
+  echo -e "${GREEN}${BOLD}$1${NC}"
 }
 
 fail() {
@@ -53,37 +55,16 @@ fi
 
 # Check Secure Boot status
 section "Checking Secure Boot status"
-sb_status=$(sbctl status 2>/dev/null) || { fail "Failed to get Secure Boot status. Is sbctl installed?"; exit 1; }
-
-if echo "$sb_status" | grep -q "Secure Boot:.*Enabled"; then
-  fail "Secure Boot is enabled. Please disable it in your UEFI firmware settings."
-  echo "Steps:"
-  echo "1. Reboot your system"
-  echo "2. Enter UEFI settings (usually F2, Del, or F12)"
-  echo "3. Find Secure Boot settings"
-  echo "4. Disable Secure Boot"
-  echo "5. Save and exit"
-  echo "6. Run this script again"
-  exit 1
+if sbctl status | grep -q "Secure Boot:.*enabled"; then
+  fail "Secure Boot is enabled. Please disable it in your firmware, run this script, then re-enable."
 fi
 
-if ! echo "$sb_status" | grep -q "Setup Mode:.*Enabled"; then
-  fail "Setup Mode is not enabled. Please enable it in your UEFI firmware settings."
-  echo "Steps:"
-  echo "1. Reboot your system"
-  echo "2. Enter UEFI settings (usually F2, Del, or F12)"
-  echo "3. Find Secure Boot settings"
-  echo "4. Enable Setup Mode (or Custom/User Mode)"
-  echo "5. Save and exit"
-  echo "6. Run this script again"
-  exit 1
+# 4b. Check for Setup Mode
+if ! sbctl status | grep -q "Setup Mode:.*enabled"; then
+  fail "UEFI is not in Setup Mode. Please enter your firmware settings, enable Setup Mode (sometimes called Custom Mode), then run this script again."
 fi
 
 success "Secure Boot status verified."
-
-section "Installing required packages"
-pacman -S --needed --noconfirm sbctl mokutil openssl linux-headers refind || { fail "Failed to install required packages."; exit 1; }
-success "Required packages installed."
 
 section "Setting up boot partition"
 boot_uuid=$(findmnt -n -o UUID /boot) || { fail "Failed to get boot partition UUID."; exit 1; }
@@ -118,55 +99,22 @@ done
 sbctl enroll-keys -m || { fail "Failed to enroll Secure Boot keys."; exit 1; }
 success "Secure Boot keys enrolled."
 
-section "Setting up pacman hooks"
-mkdir -p /etc/pacman.d/hooks
+# 7. Copy keys to NixOS default location
+section "Copying keys to /usr/share/secureboot/keys/"
+mkdir -p /usr/share/secureboot/keys/
+cp -v /usr/share/secureboot/db.key /usr/share/secureboot/keys/db.key
+cp -v /usr/share/secureboot/db.pem /usr/share/secureboot/keys/db.pem
+success "Keys copied."
 
-cat << EOF > /etc/pacman.d/hooks/99-secureboot.hook
-[Trigger]
-Operation = Install
-Operation = Upgrade
-Type = Package
-Target = linux
-Target = refind
-
-[Action]
-Description = Signing kernel and bootloader for Secure Boot...
-When = PostTransaction
-Exec = /usr/bin/sbctl sign -s /boot/EFI/refind/refind_x64.efi -s /boot/EFI/Linux/arch-linux.efi
-EOF
-success "Pacman hooks configured."
-
-section "Setting up kernel signing"
-mkdir -p /etc/dkms
-if [ ! -f /etc/dkms/module.key ]; then
-  openssl req -new -x509 -newkey rsa:2048 -keyout /etc/dkms/module.key \
-    -out /etc/dkms/module.crt -nodes -days 3650 \
-    -subj "/CN=Module Signing Key" -outform DER
-  chmod 600 /etc/dkms/module.key /etc/dkms/module.crt
-fi
-
-# Enroll module signing key
-mokutil --import /etc/dkms/module.crt || { fail "Failed to enroll module signing key."; exit 1; }
-
-# Update mkinitcpio.conf if needed
-if ! grep -q "sd-encrypt" /etc/mkinitcpio.conf; then
-  sed -i 's/HOOKS=(/HOOKS=(base systemd autodetect microcode modconf kms keyboard keymap consolefont block sd-encrypt filesystems fsck/' /etc/mkinitcpio.conf
-fi
-
-# Update linux.preset
-root_uuid=$(findmnt -n -o UUID /) || { fail "Failed to get root partition UUID."; exit 1; }
-
-cat << EOF > /etc/mkinitcpio.d/linux.preset
-ALL_config="/etc/mkinitcpio.conf"
-ALL_kver="/boot/vmlinuz-linux"
-PRESETS=('default')
-default_uki="/boot/EFI/Linux/arch-linux.efi"
-default_options="--splash /usr/share/systemd/bootctl/splash-arch.bmp root=UUID=$root_uuid rw"
-EOF
-
-# Generate and sign UKI
-mkinitcpio -P || { fail "Failed to generate UKI."; exit 1; }
-success "Kernel signing configured."
-
-echo -e "${GREEN}${BOLD}Secure Boot setup completed successfully!${NC}"
-echo "Please reboot your system and enroll the MOK in the firmware when prompted."
+section "All done!"
+echo
+echo "Now add the following to your /etc/nixos/configuration.nix:"
+echo
+echo 'boot.loader.systemd-boot.enable = true;'
+echo 'boot.loader.systemd-boot.secureBoot.enable = true;'
+echo 'boot.loader.systemd-boot.secureBoot.keyPath = "/usr/share/secureboot/keys/db.key";'
+echo 'boot.loader.systemd-boot.secureBoot.certPath = "/usr/share/secureboot/keys/db.pem";'
+echo 'Before adding check if they are already present'
+echo
+echo "Then run: sudo nixos-rebuild switch"
+echo "After rebuilding, reboot and enable Secure Boot in your firmware settings."
