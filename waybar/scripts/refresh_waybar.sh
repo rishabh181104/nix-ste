@@ -4,7 +4,7 @@
 killall .waybar-wrapped
 
 # Small delay to ensure process is fully stopped
-sleep 1
+sleep 2
 
 # Restart Waybar
 waybar &
