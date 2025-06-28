@@ -60,7 +60,7 @@ if sbctl status | grep -q "Secure Boot:.*enabled"; then
 fi
 
 # 4b. Check for Setup Mode
-if ! sbctl status | grep -q "Setup Mode:.*enabled"; then
+if ! sbctl status | grep -q "Setup Mode:.*Enabled"; then
   fail "UEFI is not in Setup Mode. Please enter your firmware settings, enable Setup Mode (sometimes called Custom Mode), then run this script again."
 fi
 
