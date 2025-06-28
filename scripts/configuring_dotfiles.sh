@@ -24,7 +24,7 @@ fail() {
 }
 
 # Base paths
-SOURCE_BASE="$HOME/nixos-dotfiles"
+SOURCE_BASE="$HOME/nix-ste"
 TARGET_BASE="$HOME/.config"
 TARGET_FOR_NIXOS="/etc"
 
