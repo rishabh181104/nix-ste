@@ -3,24 +3,24 @@
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
 { config, lib, pkgs, inputs, ... }:
-let
-sources = import ./nix/sources.nix;
-lanzaboote = import sources.lanzaboote;
-in
+# let
+# sources = import ./nix/sources.nix;
+# lanzaboote = import sources.lanzaboote;
+# in
 {
   imports = [
-    lanzaboote.nixosModules.lanzaboote
-      ./hardware-configuration.nix
+# lanzaboote.nixosModules.lanzaboote
+    ./hardware-configuration.nix
   ];
 
 # Use the systemd-boot EFI boot loader.
 # Lanzaboote replaces systemd-boot
   boot.loader.systemd-boot.enable = lib.mkForce false;
 
-  boot.lanzaboote = {
-    enable = true;
-    pkiBundle = "/var/lib/sbctl";
-  };
+# boot.lanzaboote = {
+#   enable = true;
+#   pkiBundle = "/var/lib/sbctl";
+# };
 # boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.configurationLimit = 8;
   boot.loader.efi.canTouchEfiVariables = true;

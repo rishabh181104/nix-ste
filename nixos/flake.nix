@@ -24,13 +24,7 @@
       modules = [
         ./configuration.nix
           lanzaboote.nixosModules.lanzaboote
-          ({ pkgs, lib, ... }: {
-           environment.systemPackages = [
-           pkgs.sbctl  # For Secure Boot debugging
-           inputs.zen-browser.packages.${system}.default  # Zen Browser
-           pkgs.google-chrome  # Google Chrome
-           ];
-           boot.loader.systemd-boot.enable = lib.mkForce false;
+          ({
            boot.lanzaboote = {
            enable = true;
            pkiBundle = "/var/lib/sbctl";
