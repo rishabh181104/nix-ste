@@ -15,6 +15,11 @@
   boot.loader.systemd-boot.configurationLimit = 8;
   boot.loader.efi.canTouchEfiVariables = true;
 
+# For Secure Boot On
+  boot.loader.systemd-boot.secureBoot.enable = true;
+  boot.loader.systemd-boot.secureBoot.keyPath = "/usr/share/secureboot/keys/db.key";
+  boot.loader.systemd-boot.secureBoot.certPath = "/usr/share/secureboot/keys/db.pem";
+
   nix.gc = {
     automatic = true;
     dates = "weekly";
@@ -193,6 +198,7 @@
       linuxHeaders
       mkinitcpio-nfs-utils
       linuxKernel.kernels.linux_zen
+      efibootmgr
 
 ##
 ## Packages for daily-use as in office use
