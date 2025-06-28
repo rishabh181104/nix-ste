@@ -288,6 +288,7 @@
       python313Packages.qtile-extras
       xwallpaper
       pcmanfm
+      thunar
       vlc
       mupdf
       rofi-wayland
