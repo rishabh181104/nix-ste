@@ -283,11 +283,11 @@
       pipx
       python313Packages.pip
       python313Packages.virtualenv
-      nodePackages.typescript-language-server
-      nodePackages.vscode-langservers-extracted
-      nodePackages.pyright
-      nodePackages.sql-language-server
-      nodePackages.prettier
+      typescript-language-server
+      vscode-langservers-extracted
+      pyright
+      sqls
+      prettier
       lua-language-server
       stylua
       llvmPackages_20.libcxxClang
@@ -300,18 +300,16 @@
       postgresql
       gdb
       shfmt
-
-# Rust tools (using rust-bin for stable Rust toolchain)
-      (rust-bin.stable.latest.default.override {
-       extensions = [ "rustc" "rust-analyzer" "rustfmt" ];
-       })
+      rustc
+      rust-analyzer
+      rustfmt
 
 ##
 ## Packages for Nvidia
 ##
-  vulkan-loader
-    vulkan-tools
-    ];
+      vulkan-loader
+      vulkan-tools
+      ];
 
   fonts.packages = with pkgs; [
     meslo-lgs-nf
