@@ -16,9 +16,9 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
 # For Secure Boot On
-  boot.loader.systemd-boot.secureBoot.enable = true;
-  boot.loader.systemd-boot.secureBoot.keyPath = "/usr/share/secureboot/keys/db.key";
-  boot.loader.systemd-boot.secureBoot.certPath = "/usr/share/secureboot/keys/db.pem";
+# boot.loader.systemd-boot.secureBoot.enable = true;
+# boot.loader.systemd-boot.secureBoot.keyPath = "/usr/share/secureboot/keys/db.key";
+# boot.loader.systemd-boot.secureBoot.certPath = "/usr/share/secureboot/keys/db.pem";
 
   nix.gc = {
     automatic = true;
