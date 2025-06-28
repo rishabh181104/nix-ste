@@ -73,8 +73,8 @@ set -gx PATH $HOME/.cargo/env.fish $PATH
 # ==========================================
 #           NixOS ALIASES
 # ==========================================
-alias update="sudo nixos-rebuild switch --flake"
-alias upgrade="nix flake update && sudo nixos-rebuild switch --flake --upgrade"
+alias update="sudo nixos-rebuild switch --flake ~/nixos-dotfiles/nixos/"
+alias upgrade="nix flake update && sudo nixos-rebuild switch --flake --upgrade ~/nixos-dotfiles/nixos/"
 
 # ==========================================
 #           BASIC ALIASES

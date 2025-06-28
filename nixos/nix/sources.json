@@ -5,12 +5,11 @@
         "homepage": "",
         "owner": "nix-community",
         "repo": "lanzaboote",
-        "rev": "v0.4.2",
-        "sha256": "0xc1wawnb0297h5khxblmf9pd1fry950xkcm7mwlck19s2906h80",
+        "rev": "f40a3401f86d117affeeb8ca6f0ce5cd1ca3cc24",
+        "sha256": "1w9vmhxpzkn653f3v76wv0sfba085rkarfaz74ylqc5dzfylv3ky",
         "type": "tarball",
-        "url": "https://github.com/nix-community/lanzaboote/archive/v0.4.2.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz",
-        "version": "0.4.2"
+        "url": "https://github.com/nix-community/lanzaboote/archive/f40a3401f86d117affeeb8ca6f0ce5cd1ca3cc24.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixpkgs": {
         "branch": "nixos-unstable",

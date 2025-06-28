@@ -3,16 +3,25 @@
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
 { config, lib, pkgs, inputs, ... }:
-
+let
+sources = import ./nix/sources.nix;
+lanzaboote = import sources.lanzaboote;
+in
 {
-  imports =
-    [ # Include the results of the hardware scan.
-    ./hardware-configuration.nix
-      ./lanzaboote.nix
-    ];
+  imports = [
+    lanzaboote.nixosModules.lanzaboote
+      ./hardware-configuration.nix
+  ];
 
 # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
+# Lanzaboote replaces systemd-boot
+  boot.loader.systemd-boot.enable = lib.mkForce false;
+
+  boot.lanzaboote = {
+    enable = true;
+    pkiBundle = "/var/lib/sbctl";
+  };
+# boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.configurationLimit = 8;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -20,15 +29,6 @@
   boot.bootspec.extensions = {
     "org.secureboot.osRelease" = config.environment.etc."os-release".source;
   };
-# boot.loader.systemd-boot.secureBoot.enable = true;
-# boot.loader.systemd-boot.secureBoot.keyPath = "/usr/share/secureboot/keys/db.key";
-# boot.loader.systemd-boot.secureBoot.certPath = "/usr/share/secureboot/keys/db.pem";
-#
-# fileSystems."/boot" = {
-#   device = "UUID=F118-BE93";
-#   fsType = "vfat";
-#   options = [ "rw" "relatime" "fmask=0077" "dmask=0077" "codepage=437" "iocharset=ascii" "shortname=mixed" "utf8" "errors=remount-ro" ];
-# };
 
   nix.gc = {
     automatic = true;
@@ -40,6 +40,7 @@
   programs.fish.enable = true;
   hardware.enableRedistributableFirmware = true;
   boot.kernelModules = [ "iwlwifi" ];
+
 
 ## For NVIDIA
 # hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
