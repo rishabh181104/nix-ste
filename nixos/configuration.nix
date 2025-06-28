@@ -8,6 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
+      ./lanzaboote.nix
     ];
 
 # Use the systemd-boot EFI boot loader.
@@ -202,6 +203,7 @@
 ## Packages for Kernel and Signing Kernel
 ##
       sbctl
+      niv
       mokutil
       openssl
       linuxHeaders
