@@ -16,9 +16,18 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
 # For Secure Boot On
+  boot.bootspec.extensions = {
+    "org.secureboot.osRelease" = config.environment.etc."os-release".source;
+  };
 # boot.loader.systemd-boot.secureBoot.enable = true;
 # boot.loader.systemd-boot.secureBoot.keyPath = "/usr/share/secureboot/keys/db.key";
 # boot.loader.systemd-boot.secureBoot.certPath = "/usr/share/secureboot/keys/db.pem";
+#
+# fileSystems."/boot" = {
+#   device = "UUID=F118-BE93";
+#   fsType = "vfat";
+#   options = [ "rw" "relatime" "fmask=0077" "dmask=0077" "codepage=437" "iocharset=ascii" "shortname=mixed" "utf8" "errors=remount-ro" ];
+# };
 
   nix.gc = {
     automatic = true;
