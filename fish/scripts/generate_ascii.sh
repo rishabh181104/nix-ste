@@ -1,2 +1,2 @@
 #!/bin/bash
-pokemon-colorscripts --random > ~/.config/fastfetch/temp_logo.txt
+pokemon-colorscripts --random > /tmp/temp_logo.txt
