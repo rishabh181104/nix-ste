@@ -12,7 +12,7 @@
     ./hardware-configuration.nix
   ];
 
-  # Filesystem mounts (override auto-generated ones)
+# Filesystem mounts (override auto-generated ones)
   fileSystems = lib.mkForce {
     "/" = {
       device = "/dev/sda3";
@@ -28,9 +28,16 @@
     };
   };
 
-  # Swap partition
+# Swap partition
   swapDevices = [ { device = "/dev/sda2"; } ];
-  
+
+  services.udisks2.enable = true;
+  services.udev.extraRules = ''
+# Example: Mount USB drives to /media/<label> automatically
+    ACTION=="add", SUBSYSTEM=="block", ENV{ID_FS_USAGE}=="filesystem", RUN+="${pkgs.systemd}/bin/systemd-mount --no-block --automount=yes --collect $devnode /media/%E{ID_FS_LABEL}"
+    '';
+  security.polkit.enable = true;
+
 # Use the systemd-boot EFI boot loader.
 # Lanzaboote replaces systemd-boot
   boot.loader.systemd-boot.enable = lib.mkForce false;
@@ -39,7 +46,7 @@
 #   enable = true;
 #   pkiBundle = "/var/lib/sbctl";
 # };
-  # boot.loader.systemd-boot.enable = true;
+# boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.configurationLimit = 8;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -236,6 +243,9 @@
       stirling-pdf
       thunderbird
       libreoffice-fresh
+      ntfs3g
+      exfat
+      exfatprogs
 
 ##
 ## Social Media or Chatting apps
