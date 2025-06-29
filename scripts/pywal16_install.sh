@@ -28,7 +28,7 @@ section "Installing pywal16 in a virtual environment"
 
 section "Creating virtual environment"
 rm -rf ~/pywal16-env
-python -m virtualenv ~/pywal16-env > /dev/null 2>&1 || { fail "Failed to create virtual environment."; exit 1; }
+virtualenv ~/pywal16-env > /dev/null 2>&1 || { fail "Failed to create virtual environment."; exit 1; }
 source ~/pywal16-env/bin/activate || { fail "Failed to activate virtual environment."; exit 1; }
 success "Virtual environment created and activated."
 

@@ -9,10 +9,28 @@
 # in
 {
   imports = [
-# lanzaboote.nixosModules.lanzaboote
     ./hardware-configuration.nix
   ];
 
+  # Filesystem mounts (override auto-generated ones)
+  fileSystems = lib.mkForce {
+    "/" = {
+      device = "/dev/sda3";
+      fsType = "ext4";
+    };
+    "/home" = {
+      device = "/dev/sda4";
+      fsType = "ext4";
+    };
+    "/boot/efi" = {
+      device = "/dev/sda1";
+      fsType = "vfat";
+    };
+  };
+
+  # Swap partition
+  swapDevices = [ { device = "/dev/sda2"; } ];
+  
 # Use the systemd-boot EFI boot loader.
 # Lanzaboote replaces systemd-boot
   boot.loader.systemd-boot.enable = lib.mkForce false;
@@ -21,7 +39,7 @@
 #   enable = true;
 #   pkiBundle = "/var/lib/sbctl";
 # };
-# boot.loader.systemd-boot.enable = true;
+  # boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.configurationLimit = 8;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -306,7 +324,7 @@
       vscode-langservers-extracted
       pyright
       sqls
-      prettier
+      # prettier
       lua-language-server
       stylua
       llvmPackages_20.libcxxClang
