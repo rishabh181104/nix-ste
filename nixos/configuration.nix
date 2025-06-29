@@ -324,7 +324,7 @@
       vscode-langservers-extracted
       pyright
       sqls
-      # prettier
+      prettier
       lua-language-server
       stylua
       llvmPackages_20.libcxxClang
@@ -337,6 +337,7 @@
       postgresql
       gdb
       shfmt
+      cargo
       rustc
       rust-analyzer
       rustfmt
