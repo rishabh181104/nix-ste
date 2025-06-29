@@ -20,7 +20,7 @@
   // =============================================================================
   // Custom ASCII art logo from file
   "logo": {
-    "source": "~/.config/fastfetch/temp_logo.txt",
+    "source": "/tmp/temp_logo.txt",
     "type": "file",
     "padding": {
       "top": 2,
