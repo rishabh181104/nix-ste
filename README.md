@@ -145,6 +145,3 @@ A few highlights (see `nixos/configuration.nix` for the full list):
 **Enjoy your reproducible, beautiful, and powerful Linux setup!**
 
 ---
-
-## Screenshots Folder
-Create a folder named `screenshots/` in the root of this repo and add your PNG/JPG images. Reference them in the table above for a visual showcase! 
