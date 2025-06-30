@@ -9,7 +9,7 @@
 # in
 {
   imports = [
-    ./hardware-configuration.nix
+    ./hardware.nix
   ];
 
 # Filesystem mounts (override auto-generated ones)
