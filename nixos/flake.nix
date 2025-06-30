@@ -3,6 +3,8 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    home-manager.url = "github:nix-community/home-manager/master";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
     zen-browser.url = "github:youwen5/zen-browser-flake";
     zen-browser.inputs.nixpkgs.follows = "nixpkgs";
     lanzaboote = {
@@ -11,7 +13,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, zen-browser, lanzaboote, ... }@inputs:
+  outputs = { self, nixpkgs, zen-browser, lanzaboote, home-manager, ... }@inputs:
     let
     system = "x86_64-linux";
 # Optional: Only keep this if needed by other parts of your configuration
@@ -31,6 +33,12 @@
            };
            })
       ];
+    };
+    homeConfigurations = {
+      ste = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = [ ./home.nix ];
+      };
     };
   };
 }
