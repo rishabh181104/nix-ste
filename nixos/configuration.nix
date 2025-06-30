@@ -179,6 +179,7 @@
       hyprland-qtutils
       hyprlock
       hyprpicker
+      pyprland
       xdg-desktop-portal
       xdg-desktop-portal-wlr
       xdg-desktop-portal-hyprland
