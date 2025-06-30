@@ -43,7 +43,6 @@
   };
 
   nixpkgs.config.allowUnfree = true;
-  programs.fish.enable = true;
   hardware.enableRedistributableFirmware = true;
   services.udev.packages = with pkgs; [ libmtp ];
 
@@ -126,9 +125,11 @@
 # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.ste = {
     isNormalUser = true;
+    shell = pkgs.fish;
     extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
       packages = with pkgs; [
-      tree
+      fish
+        tree
       ];
   };
 
