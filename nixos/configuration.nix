@@ -126,11 +126,9 @@
 # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.ste = {
     isNormalUser = true;
-    shell = pkgs.fish;
     extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
       packages = with pkgs; [
-      fish
-        tree
+      tree
       ];
   };
 
