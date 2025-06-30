@@ -15,7 +15,8 @@
 
   outputs = { self, nixpkgs, zen-browser, lanzaboote, home-manager, ... }@inputs:
     let
-    system = "x86_64-linux";
+    lib = nixpkgs.lib;
+  system = "x86_64-linux";
 # Optional: Only keep this if needed by other parts of your configuration
   pkgs = import nixpkgs { inherit system; config.allowUnfree = true; };
   in
@@ -27,6 +28,7 @@
         ./configuration.nix
           lanzaboote.nixosModules.lanzaboote
           ({
+           boot.loader.systemd-boot.enable = lib.mkForce false;
            boot.lanzaboote = {
            enable = true;
            pkiBundle = "/var/lib/sbctl";

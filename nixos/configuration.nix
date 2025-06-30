@@ -20,9 +20,7 @@
   security.polkit.enable = true;
 
 # Use the systemd-boot EFI boot loader.
-# Lanzaboote replaces systemd-boot
-  boot.loader.systemd-boot.enable = lib.mkForce false;
-# boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.configurationLimit = 8;
   boot.loader.efi.canTouchEfiVariables = true;
 
