@@ -65,6 +65,8 @@
   programs.fish.enable = true;
   hardware.enableRedistributableFirmware = true;
   boot.kernelModules = [ "iwlwifi" ];
+  services.udev.packages = with pkgs; [ libmtp ];
+  services.udisks2.enable = true;
 
 
 ## For NVIDIA
@@ -246,6 +248,9 @@
       ntfs3g
       exfat
       exfatprogs
+      gvfs
+      mtpfs
+      libmtp
 
 ##
 ## Social Media or Chatting apps
