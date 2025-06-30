@@ -12,6 +12,30 @@
     ./hardware.nix
   ];
 
+  networking.hostName = "nix-ste";
+  networking.networkmanager.enable = true;
+  programs.nm-applet.enable = true;
+# networking.wireless.enable = true;
+
+# Set your time zone.
+  time.timeZone = "Asia/Kolkata";
+# Define a user account. Don't forget to set a password with ‘passwd’.
+  users.users.ste = {
+    isNormalUser = true;
+    shell = pkgs.fish;
+    extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
+      packages = with pkgs; [
+      fish
+        tree
+      ];
+  };
+
+# Shell configuration
+  environment.shells = with pkgs; [ bash zsh fish ];
+  users.defaultUserShell = pkgs.fish;
+  programs.fish.enable = true;
+
+# For Automounting usb's etc.
   services.udisks2.enable = true;
   services.udev.extraRules = ''
 # Example: Mount USB drives to /media/<label> automatically
@@ -24,36 +48,22 @@
   boot.loader.systemd-boot.configurationLimit = 8;
   boot.loader.efi.canTouchEfiVariables = true;
 
-# Shell configuration
-  environment.shells = with pkgs; [ bash zsh fish ];
-  users.defaultUserShell = pkgs.fish;
-  programs.fish.enable = true;
-
-# For Secure Boot On
-  boot.bootspec.extensions = {
-    "org.secureboot.osRelease" = config.environment.etc."os-release".source;
-  };
-
   nix.gc = {
     automatic = true;
     dates = "weekly";
     options = "--delete-older-than 8";
   };
 
+# For Secure Boot On
+  boot.bootspec.extensions = {
+    "org.secureboot.osRelease" = config.environment.etc."os-release".source;
+  };
+
+# To allow unfree for google-chrome 
   nixpkgs.config.allowUnfree = true;
   hardware.enableRedistributableFirmware = true;
   services.udev.packages = with pkgs; [ libmtp ];
 
-  networking.hostName = "nix-ste"; # Define your hostname.
-# Pick only one of the below networking options.
-# networking.wireless.enable = true;
-    networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
-    programs.nm-applet.enable = true;
-
-# Set your time zone.
-  time.timeZone = "Asia/Kolkata";
-
-#
 # Setup for Hyprland
   programs.hyprland = {
     enable = true;
@@ -61,9 +71,9 @@
   };
 
 # Enable the X11 windowing system.
-# services.xserver.enable = true;
   services.xserver = {
     enable = true;
+    videoDrivers = [ "nvidia" ];
     windowManager.qtile.enable = true;
     displayManager.sessionCommands = ''
       xrandr --output eDP-1 --mode "1920x1080" --rate "60.01"
@@ -79,8 +89,6 @@
       '';
   };
 
-  services.xserver.videoDrivers = [ "nvidia" ];
-
 # Explicitly enable or disable open-source kernel modules
   hardware.nvidia = {
 # open = true; # Use open-source kernel modules (recommended for RTX/GTX 16xx GPUs)
@@ -92,15 +100,7 @@
     wayland.enable = true;
   };
 
-
-  services.picom = {
-    enable = true;
-    backend = "glx"; # Required for dual_kawase blur and v-sync
-      fade = true; # Enable fade animations
-      fadeDelta = 5; # Fade speed (adjust as needed)
-      vSync = true; # Enable v-sync
-  };
-
+  services.picom.enable = true;
 
 # Configure keymap in X11
 # services.xserver.xkb.layout = "us";
@@ -112,24 +112,16 @@
 # Enable sound.
 # services.pulseaudio.enable = true;
 # OR
-# services.pipewire = {
-#   enable = true;
-#   pulse.enable = true;
-# };
+  services.pipewire = {
+    enable = true;
+    pulse.enable = true;
+  };
 
 # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
 
-# Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.ste = {
-    isNormalUser = true;
-    shell = pkgs.fish;
-    extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
-      packages = with pkgs; [
-      fish
-        tree
-      ];
-  };
+# Enable the OpenSSH daemon.
+  services.openssh.enable = true;
 
   programs.firefox.enable = true;
 
@@ -328,8 +320,6 @@
 
 # List services that you want to enable:
 
-# Enable the OpenSSH daemon.
-  services.openssh.enable = true;
 
 # Open ports in the firewall.
 # networking.firewall.allowedTCPPorts = [ ... ];
