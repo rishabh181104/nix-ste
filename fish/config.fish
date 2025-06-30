@@ -250,6 +250,11 @@ function brave-nvidia
   env __NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia brave-browser --use-gl=desktop
 end
 
+# Just for cd and ls -a in a single command
+function cd
+  builtin cd $argv[1]; and ls -a
+end
+
 # ==========================================
 #           EXTERNAL CONFIGURATIONS
 # ==========================================
