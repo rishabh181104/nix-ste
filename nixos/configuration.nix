@@ -12,7 +12,6 @@
     ./hardware.nix
   ];
 
-
   services.udisks2.enable = true;
   services.udev.extraRules = ''
 # Example: Mount USB drives to /media/<label> automatically
@@ -23,14 +22,14 @@
 # Use the systemd-boot EFI boot loader.
 # Lanzaboote replaces systemd-boot
   boot.loader.systemd-boot.enable = lib.mkForce false;
-
-# boot.lanzaboote = {
-#   enable = true;
-#   pkiBundle = "/var/lib/sbctl";
-# };
-# boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.configurationLimit = 8;
   boot.loader.efi.canTouchEfiVariables = true;
+
+# Shell configuration
+  environment.shells = with pkgs; [ bash zsh fish ];
+  users.defaultUserShell = pkgs.fish;
+  programs.fish.enable = true;
 
 # For Secure Boot On
   boot.bootspec.extensions = {
@@ -48,19 +47,6 @@
   hardware.enableRedistributableFirmware = true;
   services.udev.packages = with pkgs; [ libmtp ];
 
-
-## For NVIDIA
-# hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
-# hardware.opengl.enable = true;
-# hardware.nvidia.nvidiaSettings = true; # Enables nvidia-settings tool
-# hardware.nvidia.powerManagement.enable = true; # Optional, for power management
-# boot.blacklistedKernelModules = [ "nouveau" ];
-# hardware.nvidia.prime = {
-# sync.enable = true;
-# # nvidiaBusId = "PCI:1:0:0"; # Replace with your NVIDIA GPU's PCI ID
-# # intelBusId = "PCI:0:2:0";  # Replace with your Intel GPU's PCI ID
-# };
-
   networking.hostName = "nix-ste"; # Define your hostname.
 # Pick only one of the below networking options.
 # networking.wireless.enable = true;
@@ -70,28 +56,12 @@
 # Set your time zone.
   time.timeZone = "Asia/Kolkata";
 
-# Configure network proxy if necessary
-# networking.proxy.default = "http://user:password@proxy:port/";
-# networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-# Select internationalisation properties.
-# i18n.defaultLocale = "en_US.UTF-8";
-# console = {
-#   font = "Lat2-Terminus16";
-#   keyMap = "us";
-#   useXkbConfig = true; # use xkb.options in tty.
-# };
-
 #
 # Setup for Hyprland
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
   };
-
-#   enviroment.sessionVariables = {
-#   	NIXOS_OZONE_WL = "1";
-# };
 
 # Enable the X11 windowing system.
 # services.xserver.enable = true;
@@ -151,7 +121,7 @@
 # };
 
 # Enable touchpad support (enabled default in most desktopManager).
-# services.libinput.enable = true;
+  services.libinput.enable = true;
 
 # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.ste = {
@@ -370,27 +340,6 @@
 # Or disable the firewall altogether.
 # networking.firewall.enable = false;
 
-# Copy the NixOS configuration file and link it from the resulting system
-# (/run/current-system/configuration.nix). This is useful in case you
-# accidentally delete configuration.nix.
-# system.copySystemConfiguration = true;
-
-# This option defines the first version of NixOS you have installed on this particular machine,
-# and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
-#
-# Most users should NEVER change this value after the initial install, for any reason,
-# even if you've upgraded your system to a new NixOS release.
-#
-# This value does NOT affect the Nixpkgs version your packages and OS are pulled from,
-# so changing it will NOT upgrade your system - see https://nixos.org/manual/nixos/stable/#sec-upgrading for how
-# to actually do that.
-#
-# This value being lower than the current NixOS release does NOT mean your system is
-# out of date, out of support, or vulnerable.
-#
-# Do NOT change this value unless you have manually inspected all the changes it would make to your configuration,
-# and migrated your data accordingly.
-#
 # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "25.05"; # Did you read the comment?
 
