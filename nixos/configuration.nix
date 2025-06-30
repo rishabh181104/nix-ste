@@ -66,7 +66,6 @@
   hardware.enableRedistributableFirmware = true;
   boot.kernelModules = [ "iwlwifi" ];
   services.udev.packages = with pkgs; [ libmtp ];
-  services.udisks2.enable = true;
 
 
 ## For NVIDIA
