@@ -12,24 +12,6 @@
     ./hardware.nix
   ];
 
-# Filesystem mounts (override auto-generated ones)
-  fileSystems = lib.mkForce {
-    "/" = {
-      device = "/dev/sda3";
-      fsType = "ext4";
-    };
-    "/home" = {
-      device = "/dev/sda4";
-      fsType = "ext4";
-    };
-    "/boot/efi" = {
-      device = "/dev/sda1";
-      fsType = "vfat";
-    };
-  };
-
-# Swap partition
-  swapDevices = [ { device = "/dev/sda2"; } ];
 
   services.udisks2.enable = true;
   services.udev.extraRules = ''
@@ -64,7 +46,6 @@
   nixpkgs.config.allowUnfree = true;
   programs.fish.enable = true;
   hardware.enableRedistributableFirmware = true;
-  boot.kernelModules = [ "iwlwifi" ];
   services.udev.packages = with pkgs; [ libmtp ];
 
 
