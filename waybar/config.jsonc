@@ -136,6 +136,7 @@
   // ==========================================
   // PulseAudio audio controls
   "pulseaudio": {
+    "on-click": "pypr toggle pavucontrol && hyprctl dispatch bringactivetotop",
     "format": "{icon} {volume}%",
     "format-bluetooth": "{icon} 󰂰 {volume}%",
     "format-muted": "󰖁",
