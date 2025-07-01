@@ -12,7 +12,7 @@
     ./hardware.nix
   ];
 
-  networking.hostName = "nix-ste";
+  networking.hostName = "work";
   networking.networkmanager.enable = true;
   programs.nm-applet.enable = true;
 # networking.wireless.enable = true;
@@ -149,6 +149,8 @@
       virt-manager
       virt-viewer
       bridge-utils
+      spice
+      spice-gtk
 
 ##
 ## Packages for Hyprland
