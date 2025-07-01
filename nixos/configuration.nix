@@ -162,6 +162,11 @@
       nwg-look
 
 ##
+## Packages for spotify
+##
+      spotify
+      spotify-tray
+##
 ## Packages for shells
 ##
       bash
