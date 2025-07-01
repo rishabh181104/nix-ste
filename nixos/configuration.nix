@@ -130,9 +130,16 @@
   programs.ssh.startAgent = true;
   environment.systemPackages = with pkgs; [
 ##
+## Packages for VM
+##
+    qemu
+      libvirt
+      virt-manager
+
+##
 ## Packages for Hyprland
 ##
-    hyprland
+      hyprland
       hypridle
       hyprland-qt-support
       hyprland-qtutils
