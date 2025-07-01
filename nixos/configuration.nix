@@ -32,6 +32,8 @@
 
 # Enable KVM and libvirtd
   virtualisation = {
+    graphics = true;
+    spiceUSBRedirection.enable = true;
     libvirtd = {
       enable = true;
       qemu = {
@@ -40,7 +42,6 @@
       };
     };
   };
-  virtualisation.spiceUSBRedirection.enable = true;
 
 # Shell configuration
   environment.shells = with pkgs; [ bash zsh fish ];
