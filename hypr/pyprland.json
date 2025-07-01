@@ -3,17 +3,11 @@
     "plugins": ["scratchpads", "magnify"]
   },
   "scratchpads": {
-    "term": {
-      "command": "kitty --class scratchpad",
+    "alacritty": {
+      "command": "alacritty --class scratchpad",
       "margin": 50
     },
-    "spotify": {
-      "command": "spotify --scratchpad",
-      "margin": 50,
-      "unfocus": "hide",
-      "animation": "fromTop"
-    },
-    "pavucontrol": {
+    "scratchpads": {
       "command": "pavucontrol",
       "margin": 50,
       "unfocus": "hide",
