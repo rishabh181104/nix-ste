@@ -162,6 +162,13 @@
       nwg-look
 
 ##
+## Packages for shells
+##
+      bash
+      zsh
+      fish
+
+##
 ## Packages for Browsers
 ##
       google-chrome
