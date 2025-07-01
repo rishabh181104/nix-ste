@@ -32,7 +32,6 @@
 
 # Enable KVM and libvirtd
   virtualisation = {
-    graphics = true;
     spiceUSBRedirection.enable = true;
     libvirtd = {
       enable = true;
