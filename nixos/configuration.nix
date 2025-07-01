@@ -30,6 +30,10 @@
       ];
   };
 
+# Enable KVM and libvirtd
+  virtualisation.libvirtd.enable = true;
+  virtualisation.spiceUSBRedirection.enable = true;
+
 # Shell configuration
   environment.shells = with pkgs; [ bash zsh fish ];
   users.defaultUserShell = pkgs.fish;
@@ -135,6 +139,8 @@
     qemu
       libvirt
       virt-manager
+      virt-viewer
+      bridge-utils
 
 ##
 ## Packages for Hyprland
