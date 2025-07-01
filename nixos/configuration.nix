@@ -31,7 +31,15 @@
   };
 
 # Enable KVM and libvirtd
-  virtualisation.libvirtd.enable = true;
+  virtualisation.libvirtd = {
+    enable = true;
+    onBoot = "ignore";  # or "start" if you want it auto-started
+      qemu = {
+        package = pkgs.qemu_kvm;
+        runAsRoot = true;
+        swtpm.enable = true;  # For TPM support (optional)
+      };
+  };
   virtualisation.spiceUSBRedirection.enable = true;
 
 # Shell configuration
