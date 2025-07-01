@@ -12,7 +12,7 @@
     ./hardware.nix
   ];
 
-  networking.hostName = "work";
+  networking.hostName = "nix-ste";
   networking.networkmanager.enable = true;
   programs.nm-applet.enable = true;
 # networking.wireless.enable = true;

@@ -21,7 +21,7 @@
   pkgs = import nixpkgs { inherit system; config.allowUnfree = true; };
   in
   {
-    nixosConfigurations.work = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.nix-ste = nixpkgs.lib.nixosSystem {
       inherit system;
       specialArgs = { inherit inputs; };
       modules = [
