@@ -198,6 +198,7 @@
       gvfs
       mtpfs
       libmtp
+      htop
 
 ##
 ## Social Media or Chatting apps
