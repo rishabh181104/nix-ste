@@ -264,6 +264,7 @@
 ## Packages for Editors
 ##
       code-cursor
+      zed-editor
       vim 
       neovim
       wget
