@@ -201,6 +201,7 @@
 ##
       google-chrome
       inputs.zen-browser.packages.${pkgs.system}.default
+      brave
 
 ##
 ## Packages for Kernel and Signing Kernel
