@@ -26,6 +26,8 @@
     extraGroups = [ "wheel" "networkmanager" "libvirtd" "kvm" ]; # Enable ‘sudo’ for the user.
       packages = with pkgs; [
       fish
+        brave
+        google-chrome
         tree
       ];
   };
@@ -136,7 +138,6 @@
   services.openssh.enable = true;
 
   programs.firefox.enable = true;
-  programs.brave.enable = true;
 
 # List packages installed in system profile.
 # You can use https://search.nixos.org/ to find more packages (and options).
@@ -190,12 +191,6 @@
 ##
       spotify
       spotify-tray
-##
-## Packages for shells
-##
-      bash
-      zsh
-      fish
 
 ##
 ## Packages for Browsers
@@ -248,6 +243,8 @@
 ##
       fish
       starship
+      bash
+      zsh
 
 ##
 ## Packages for Nework
