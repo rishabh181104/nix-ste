@@ -225,6 +225,7 @@
       exfatprogs
       gvfs
       mtpfs
+      usbutils
       libmtp
       htop
 
